@@ -1,27 +1,26 @@
 package main
 
 import (
-	"net/http"
+	"encoding/json"
 	"io/ioutil"
 	"log"
-	"encoding/json"
+	"net/http"
 )
 
-
 type Image struct {
-	Format    string
-	Width     int
-	Height    int
-	Filename  string
-	Id        int
-	Author    string
+	Format     string
+	Width      int
+	Height     int
+	Filename   string
+	Id         int
+	Author     string
 	Author_Url string
 	Post_Url   string
 }
 
 func Download(image Image) {
 
-	res, err := http.Get(image.Post_Url+"/download")
+	res, err := http.Get(image.Post_Url + "/download")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -38,7 +37,7 @@ func Download(image Image) {
 		log.Fatal(err)
 	}
 
-	log.Println("Downloading "+images.Filename)
+	log.Println("Downloading " + images.Filename)
 }
 
 func main() {
@@ -55,7 +54,7 @@ func main() {
 
 	defer res.Body.Close()
 
-	var images[]Image
+	var images []Image
 	err = json.Unmarshal(body, &images)
 	if err != nil {
 		log.Fatal(err)
