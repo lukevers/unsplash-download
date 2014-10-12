@@ -37,7 +37,7 @@ func Download(image Image) {
 		log.Fatal(err)
 	}
 
-	log.Println("Downloading " + images.Filename)
+	log.Println("Downloading " + image.Filename)
 }
 
 func main() {
